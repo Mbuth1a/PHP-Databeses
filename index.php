@@ -1,3 +1,35 @@
+<?php 
+$server="localhost";
+$username="root";
+$password="";
+$database="zalego";
+$conn= mysqli_connect($server,$username,$password,$database);
+if(isset($_POST['submitButton']))
+{//1. Fetch form data
+$firstName = $_POST["firstName"];
+$lastName= $_POST["lastName"];
+$phone=$_POST["phone"];
+$email=$_POST["email"];
+$message=$_POST['message'];
+
+
+  //2. submit form data
+  $insertData = mysqli_query($conn, "INSERT INTO
+  contactus(firstName,lastName,phone,email,message)
+  VALUES('$firstName', '$lastName', '$phone', '$email', '$message')");
+
+if($insertData)
+{
+  echo "successful";
+}
+else{
+  echo "error occurred";
+}
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +42,8 @@
 
 </head>
 <body>
- 
-    <!-- navigation bar -->
+ <!--  
+     navigation bar 
     <nav class="navbar navbar-expand-lg bg-light shadow fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Zalego Academy</a>
@@ -22,14 +54,14 @@
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
               <a class="nav-link" href="#">About Us</a>
-              <a class="nav-link" href="#">Contact Us</a>
+              <a class="nav-link" href="/contact.php">Contact Us</a>
             </div>
           </div>
         </div>
       </nav>
+ 
 
-
-    <!-- end of navigation nav -->
+     end of navigation nav -->
     <a class="toggle-btn"><i class="fa fa-bars"></i></a>
     
 
@@ -79,63 +111,53 @@
         </div>
 
 
-      
-      
-      
-      
-      
-      </div>
-    
-       <!-- Contact us page -->
-       <div class="row pt-5">
+      <!-- Contact us page -->
+    <div class="row pt-5" name="contact">
          <h1>Contact us</h1>
          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci hic in ab qui cum facilis suscipit? Omnis, corporis dolorum sunt vitae expedita minima aperiam, eius deserunt eos modi voluptates blanditiis.</p>
-       <form>
+       <form action="index.php" method="POST">
          <div class="row">
            <div class="mb-3 col-lg-6"></div>
            <label for="first-name" class="form-label">First Name</label>
-           <input type="text" class="form-control" placeholder="Enter Your First Name">
+           <input type="text" name="firstName" class="form-control" placeholder="Enter Your First Name">
          </div>
 
 
          <div class="mb-3 col-lg-6">
           <label for="last-name" class="form-label">Last Name</label>
-          <input type="text" class="form-control" placeholder="Enter Your Last Name">
+          <input type="text" name="lastName" class="form-control" placeholder="Enter Your Last Name">
 
          </div>
          <div class="row">
          <div class="mb-3 col-lg-6">
-          <label for="Phone Number" class="form-label">Phone-Number</label>
-          <input type="text" class="form-control" placeholder="Enter Your Phone-Number">
-
+          <label for="Phonenumber" class="form-label">Phone Number</label>
+          <input type="text" name="phone" class="form-control" placeholder="Enter Your Phone-Number">
          </div>
          </div>
         </div>
-        <!-- end of contact us -->
-       
+      </div>     
         <div class="row">
         <div class="mb-3 col-lg-6">
-         <label for="Email Address" class="form-label">Email-Address</label>
-         <input type="text" class="form-control" placeholder="Enter Your Email Address">
-
+         <label for="Email Address" class="form-label">Email Address</label>
+         <input type="text"  name="email" class="form-control" placeholder="Enter Your Email Address">
         </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <label for="message" class="form-label">Your message</label>
-            <textarea cols="30" rows="10" class="form-control"></textarea>
+            <textarea cols="30"  name= "message" rows="10" class="form-control"></textarea>
           </div>
         </div>
         <br>
         <br>
         <br>
         <br>
-        <button type="submit" class="btn btn-primary">Your message</button>
-
+        
+        <button type= "submit" name= "submitButton" class="btn btn-primary">Send a Message</button>
 
        </form>
        
-       
+       <!-- end of contact us -->
        
         
        
