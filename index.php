@@ -1,35 +1,5 @@
-<?php 
-$server="localhost";
-$username="root";
-$password="";
-$database="zalego";
-$conn= mysqli_connect($server,$username,$password,$database);
-if(isset($_POST['submitButton']))
-{//1. Fetch form data
-$firstName = $_POST["firstName"];
-$lastName= $_POST["lastName"];
-$phone=$_POST["phone"];
-$email=$_POST["email"];
-$message=$_POST['message'];
-
-
-  //2. submit form data
-  $insertData = mysqli_query($conn, "INSERT INTO
-  contactus(firstName,lastName,phone,email,message)
-  VALUES('$firstName', '$lastName', '$phone', '$email', '$message')");
-
-if($insertData)
-{
-  echo "successful";
-}
-else{
-  echo "error occurred";
-}
-
-}
-
+<?php Include("process.php")
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +8,7 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Bootstrap2-main/bootstrap-5.2.0-beta1-dist/css/bootstrap.min.css">
     <title>Zalego Login</title>
+
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -109,24 +80,31 @@ else{
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias voluptas cum corporis minus! Magnam eum, suscipit consequatur ullam voluptates ea voluptatum doloribus provident maxime blanditiis ad perspiciatis exercitationem earum harum!</p>
           <button class="btn btn-primary">View Details</button>
         </div>
-
-
-      <!-- Contact us page -->
+         <!-- Contact us page -->
     <div class="row pt-5" name="contact">
          <h1>Contact us</h1>
+         
          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci hic in ab qui cum facilis suscipit? Omnis, corporis dolorum sunt vitae expedita minima aperiam, eius deserunt eos modi voluptates blanditiis.</p>
        <form action="index.php" method="POST">
-         <div class="row">
+       <span class="alert alert-success">
+        <?php 
+        if($response)
+        { 
+          include["response.php"];
+        }
+       ?>
+       
+       <div class="row">
            <div class="mb-3 col-lg-6"></div>
            <label for="first-name" class="form-label">First Name</label>
            <input type="text" name="firstName" class="form-control" placeholder="Enter Your First Name">
          </div>
 
-
+        <div class="row">
          <div class="mb-3 col-lg-6">
           <label for="last-name" class="form-label">Last Name</label>
           <input type="text" name="lastName" class="form-control" placeholder="Enter Your Last Name">
-
+         </div>
          </div>
          <div class="row">
          <div class="mb-3 col-lg-6">
@@ -158,11 +136,7 @@ else{
        </form>
        
        <!-- end of contact us -->
-       
-        
-       
-       
-       
+
        <hr>
        <footer>
          &copy;Company 2022
